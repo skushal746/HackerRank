@@ -15,6 +15,7 @@ public class TheBombermanGame {
 		grid = bomberMan(n, grid);
 		for(int i=0;i<grid.length;i++)
 			System.out.println(grid[i]);
+		scr.close();
 	}
 	
 	// Complete the bomberMan function below.

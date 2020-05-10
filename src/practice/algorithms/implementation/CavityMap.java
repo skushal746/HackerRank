@@ -14,6 +14,7 @@ public class CavityMap {
 		grid = cavityMap(grid);
 		for(int i=0;i<grid.length;i++)
 			System.out.println(grid[i]);
+		scr.close();
 	}
 	
 	static String[] cavityMap(String[] grid) {

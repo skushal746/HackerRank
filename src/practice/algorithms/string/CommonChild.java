@@ -11,6 +11,7 @@ public class CommonChild {
 		String s1 = scr.nextLine();
 		String s2 = scr.nextLine();
 		System.out.println(commonChild(s1, s2));
+		scr.close();
 	}
 	
 	static int commonChild(String s1, String s2) {

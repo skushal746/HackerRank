@@ -13,6 +13,7 @@ public class FraudulentActivityNotifications {
 			expenditure[i] = scr.nextInt();
 		
 		System.out.println(activityNotifications(expenditure, d));
+		scr.close();
 	}
 	
 	static int activityNotifications(int[] expenditure, int d) {

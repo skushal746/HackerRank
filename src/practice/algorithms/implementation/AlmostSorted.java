@@ -10,6 +10,7 @@ public class AlmostSorted {
 		int n = scr.nextInt();
 		int[] arr = new int[n];
 		almostSorted(arr);
+		scr.close();
 	}
 	
 	static void almostSorted(int[] arr) {

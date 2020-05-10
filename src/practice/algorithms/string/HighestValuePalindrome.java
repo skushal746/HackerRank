@@ -1,7 +1,6 @@
 package practice.algorithms.string;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,6 +13,7 @@ public class HighestValuePalindrome {
 		String enter = scr.nextLine();
 		String s = scr.nextLine();
 		System.out.println(highestValuePalindrome(s, n, k));
+		scr.close();
 	}
 	
 	static String highestValuePalindrome(String s, int n, int k) throws IOException {

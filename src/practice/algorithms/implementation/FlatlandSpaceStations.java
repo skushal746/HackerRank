@@ -13,6 +13,7 @@ public class FlatlandSpaceStations {
 		for(int i=0;i<cCount;i++)
 			c[i]=scr.nextInt();
 		System.out.println(flatlandSpaceStations(n, c));
+		scr.close();
 	}
 	
 	static int flatlandSpaceStations(int n, int[] c) {

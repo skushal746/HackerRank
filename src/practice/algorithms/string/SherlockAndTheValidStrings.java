@@ -10,6 +10,7 @@ public class SherlockAndTheValidStrings {
 		Scanner scr = new Scanner(System.in);
 		String s = scr.nextLine();
 		System.out.println(isValid(s));
+		scr.close();
 	}
 	
 	static String isValid(String s) {

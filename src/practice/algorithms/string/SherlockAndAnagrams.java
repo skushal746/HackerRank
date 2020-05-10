@@ -14,6 +14,7 @@ public class SherlockAndAnagrams {
 			String s = scr.nextLine();
 			System.out.println(sherlockAndAnagrams(s));
 		}
+		scr.close();
 	}
 	
 	static int sherlockAndAnagrams(String s) {

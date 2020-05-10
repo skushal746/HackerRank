@@ -15,6 +15,7 @@ public class LilyHomework {
 			arr[i] = scr.nextInt();
 
 		System.out.println(lilysHomework(arr));
+		scr.close();
 	}
 
 	static int lilysHomework(int[] arr) {

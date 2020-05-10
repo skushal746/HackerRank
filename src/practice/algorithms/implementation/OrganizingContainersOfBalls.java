@@ -17,6 +17,7 @@ public class OrganizingContainersOfBalls {
 					container[j][k]=scr.nextInt();
 			System.out.println(organizingContainers(container));
 		}
+		scr.close();
 	}
 	
 	static String organizingContainers(int[][] container) {

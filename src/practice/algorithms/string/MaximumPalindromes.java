@@ -1,9 +1,6 @@
 package practice.algorithms.string;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -17,6 +14,7 @@ public class MaximumPalindromes {
 		{
 			System.out.println(Result.answerQuery(scr.nextInt(), scr.nextInt()));
 		}
+		scr.close();
 	}
 }
 

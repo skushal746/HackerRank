@@ -13,6 +13,7 @@ public class MinimumLoss {
 		for(int i=0;i<n;i++)
 			price[i]=scr.nextLong();
 		System.out.println(minimumLoss(price));
+		scr.close();
 	}
 	
 	static int minimumLoss(long[] price) {

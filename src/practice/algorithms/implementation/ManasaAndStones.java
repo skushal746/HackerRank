@@ -19,6 +19,7 @@ public class ManasaAndStones {
 				System.out.print(lastStoneValue[j] + " ");
 			System.out.println();
 		}
+		scr.close();
 	}
 	
 	static int[] stones(int n, int a, int b) {

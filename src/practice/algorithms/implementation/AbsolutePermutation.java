@@ -16,6 +16,8 @@ public class AbsolutePermutation {
 				System.out.print(output[j] + " ");
 			System.out.println();
 		}
+		
+		scr.close();
 	}
 	
 	static int[] absolutePermutation(int n, int k) {

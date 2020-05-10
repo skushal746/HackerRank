@@ -10,6 +10,7 @@ public class FairRations {
 		for(int i=0;i<n;i++)
 			B[i]=scr.nextInt();
 		System.out.println(fairRations(B));
+		scr.close();
 	}
 	
 	static Object fairRations(int[] B) {
