@@ -1,7 +1,5 @@
 package practice.algorithms.string;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -17,88 +15,53 @@ public class HighestValuePalindrome {
 	}
 	
 	static String highestValuePalindrome(String s, int n, int k) throws IOException {
-		char[] sCharacters = s.toCharArray();
-		for(int i=sCharacters.length%2==0?sCharacters.length/2-1:sCharacters.length/2;i>=0;i--)
+		char[] stringCharacters = s.toCharArray();
+		int minimumChangesRequired = 0;
+		for(int i=0;i<n/2;i++)
+			if(stringCharacters[i]!=stringCharacters[n-1-i])
+				minimumChangesRequired++;
+		if(k < minimumChangesRequired)
+			return String.valueOf(-1);
+		
+		for(int i=0;i<n/2;i++)
 		{
-			if(k>=n)
+			if(stringCharacters[i]==stringCharacters[n-1-i] && stringCharacters[i]!='9' && (k>=minimumChangesRequired+2))
 			{
-				if(i==sCharacters.length-1-i)
-				{
-					if(sCharacters[i]!='9')
-					{
-						sCharacters[i]='9';
-						k--;
-					}
-					n--;
-				}
-				else
-				{
-					if(sCharacters[i]!='9' || sCharacters[sCharacters.length-1-i]!='9')
-					{
-						if(sCharacters[i]!=9)
-						{
-							sCharacters[i]='9';
-							k--;
-						}
-						if(sCharacters[sCharacters.length-1-i]!='9')
-						{
-							sCharacters[sCharacters.length-1-i]='9';
-							k--;
-						}
-					}
-					n-=2;
-				}
+				k-=2;
+				stringCharacters[i] = '9';
+				stringCharacters[n-1-i] = '9';
 			}
-			else
+			else if(stringCharacters[i]!=stringCharacters[n-1-i])
 			{
-				if(i!=sCharacters.length-1-i)
+				if(stringCharacters[i]=='9' || stringCharacters[n-1-i]=='9')
 				{
-					if(sCharacters[i]!=sCharacters[sCharacters.length-1-i])
-					{
-						if(k<1)
-							return String.valueOf(-1);
-						char greaterCharacter = sCharacters[i]>sCharacters[sCharacters.length-1-i]?sCharacters[i]:sCharacters[sCharacters.length-1-i];
-						sCharacters[i]=greaterCharacter;
-						sCharacters[sCharacters.length-1-i]=greaterCharacter;
-						k--;
-					}
-					n-=2;
+					stringCharacters[i]='9';
+					stringCharacters[n-1-i]='9';
+					minimumChangesRequired--;
+					k--;
 				}
-				else n--;
+				else if(k==minimumChangesRequired)
+				{
+					char greaterCharacter = stringCharacters[i]>stringCharacters[n-1-i]?stringCharacters[i]:stringCharacters[n-1-i];
+					stringCharacters[i] = greaterCharacter;
+					stringCharacters[n-1-i] = greaterCharacter;
+					minimumChangesRequired--;
+					k--;	
+				}
+				else if(k>=minimumChangesRequired+1)
+				{
+					stringCharacters[i]='9';
+					stringCharacters[n-1-i]='9';
+					minimumChangesRequired--;
+					k-=2;	
+				}
+				
 			}
 		}
-		if(k>0)
-			for(int i=0;i<=(sCharacters.length%2==0?sCharacters.length/2-1:sCharacters.length/2);i++)
-			{
-				if(k<1)
-					break;
-				if(i!=sCharacters.length-1-i)
-				{
-					if(sCharacters[i]!='9' && k>1)
-					{
-						sCharacters[i]='9';
-						sCharacters[sCharacters.length-i-1]='9';
-						k-=2;
-					}
-				}
-				else
-				{
-					if(sCharacters[i]!='9')
-					{
-						sCharacters[i]='9';
-						k--;
-					}
-				}
-			}
 		
-		File file = new File("temp.txt");
-		if(!file.exists())
-			file.createNewFile();
+		if(n%2==1 && stringCharacters[n/2]!='9' && k>0)
+			stringCharacters[n/2]='9';
 		
-		FileOutputStream inputStream = new FileOutputStream(file);
-		inputStream.write(String.valueOf(sCharacters).getBytes());
-		inputStream.flush();
-		inputStream.close();
-		return String.valueOf(sCharacters);
+		return String.valueOf(stringCharacters);
 	}
 }
