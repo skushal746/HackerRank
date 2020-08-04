@@ -18,63 +18,81 @@ public class BearAndSteadyGene {
 	}
 	
 	static int steadyGene(String gene) {
-		int numberRequired = gene.length()/4;
+		
+		int required = gene.length()/4;
 		char[] geneCharacters = gene.toCharArray();
-		Map<Character, Integer> currentlyContains = new HashMap<Character, Integer>();
-		Map<Character, Integer> needsToBeChanged = new HashMap<Character, Integer>();
-		currentlyContains.put('A', 0);
-		currentlyContains.put('C', 0);
-		currentlyContains.put('G', 0);
-		currentlyContains.put('T', 0);
-		needsToBeChanged.put('A', 0);
-		needsToBeChanged.put('C', 0);
-		needsToBeChanged.put('G', 0);
-		needsToBeChanged.put('T', 0);
-		List<Character> charNeedsChanging = new ArrayList<Character>();
-		for(int i=0;i<geneCharacters.length;i++)
+		int gCharacters = 0;
+		int cCharacters = 0;
+		int aCharacters = 0;
+		int tCharacters = 0;
+		
+		for(int i=0;i<gene.length();i++)
 		{
-			currentlyContains.put(geneCharacters[i], currentlyContains.get(geneCharacters[i])+1);
+			if(geneCharacters[i]=='G')
+				gCharacters++;
+			else if(geneCharacters[i]=='C')
+				cCharacters++;
+			else if(geneCharacters[i]=='T')
+				tCharacters++;
+			else aCharacters++;
 		}
-		for(Map.Entry<Character, Integer> entry : currentlyContains.entrySet())
-			if(entry.getValue() > numberRequired)
-			{
-				needsToBeChanged.put(entry.getKey(), entry.getValue()-numberRequired);
-				charNeedsChanging.add(entry.getKey());
-			}
 		
-		int lengthOfSubStringNeedToBeChanged = 500000;
+		Map<Character, Integer> toBeRemoved = new HashMap<Character, Integer>();
+		if(gCharacters>required)
+			toBeRemoved.put('G', gCharacters-required);
+		if(cCharacters>required)
+			toBeRemoved.put('C', cCharacters-required);
+		if(tCharacters>required)
+			toBeRemoved.put('T', tCharacters-required);
+		if(aCharacters>required)
+			toBeRemoved.put('A', aCharacters-required);
 		
+		int gRequired = toBeRemoved.containsKey('G')?toBeRemoved.get('G'):0;
+		int cRequired = toBeRemoved.containsKey('C')?toBeRemoved.get('C'):0;
+		int tRequired = toBeRemoved.containsKey('T')?toBeRemoved.get('T'):0;
+		int aRequired = toBeRemoved.containsKey('A')?toBeRemoved.get('A'):0;
+		
+		/*
+		for(Map.Entry<Character, Integer> singleEntry : toBeRemoved.entrySet())
+			System.out.println(singleEntry.getKey() + " " + singleEntry.getValue());
+		*/
+		
+		int minimumLength = -1;
 		for(int i=0;i<geneCharacters.length;i++)
 		{
-			if(charNeedsChanging.contains(geneCharacters[i]))
+			int gReceived = 0;
+			int cReceived = 0;
+			int tReceived = 0;
+			int aReceived = 0;
+			if(toBeRemoved.containsKey(geneCharacters[i]))
 			{
-				Map<Character, Integer> subStringHoldingCharacters = new HashMap<Character, Integer>();
-				int subStringLength = 0;
-				subStringHoldingCharacters.put('A', 0);
-				subStringHoldingCharacters.put('C', 0);
-				subStringHoldingCharacters.put('G', 0);
-				subStringHoldingCharacters.put('T', 0);
-				boolean findSubString = true;
-				while(subStringHoldingCharacters.get('A') <  needsToBeChanged.get('A')
-						|| subStringHoldingCharacters.get('C') <  needsToBeChanged.get('C')
-						|| subStringHoldingCharacters.get('G') <  needsToBeChanged.get('G')
-						|| subStringHoldingCharacters.get('T') <  needsToBeChanged.get('T'))
+				int j = i;
+				
+				boolean validCase = true;
+				
+				while(!(gReceived>=gRequired && cReceived>=cRequired && tReceived>=tRequired && aReceived>=aRequired))
 				{
-					if(i+subStringLength>=geneCharacters.length)
+					if(j==gene.length())
 					{
-						findSubString = false;
+						validCase=false;
 						break;
 					}
-					subStringHoldingCharacters.put(geneCharacters[i + subStringLength], subStringHoldingCharacters.get(geneCharacters[i + subStringLength]) + 1);
-					subStringLength++;
+					
+					if(geneCharacters[j]=='G')
+						gReceived++;
+					else if(geneCharacters[j]=='C')
+						cReceived++;
+					else if(geneCharacters[j]=='T')
+						tReceived++;
+					else aReceived++;
+					
+					j++;
 				}
-				
-				if(lengthOfSubStringNeedToBeChanged > subStringLength && findSubString)
-					lengthOfSubStringNeedToBeChanged = subStringLength;
+				if(validCase)
+					if(minimumLength ==-1 || minimumLength>(j-i))
+						minimumLength = j-i;
 			}
 		}
-		
-		
-		return lengthOfSubStringNeedToBeChanged;
+		return minimumLength;
     }	
 }
