@@ -26,12 +26,14 @@ public class TestingCollectionGenerics {
 		displayList(yolo);
 	}
 	
+	// works without any error
 	public static void displayList1(List<Integer> yolo)
 	{
 		for(Object string : yolo)
 			System.out.println(string);
 	}
 	
+	// gives runtime error
 	public static void displayList(List<Integer> yolo)
 	{
 		for(Integer string : yolo)
